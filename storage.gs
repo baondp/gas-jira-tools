@@ -22,6 +22,7 @@ function hasSettings(alert) {
   var url = getCfg('jira_url');
   var username = getCfg('jira_username');
   var password = getCfg('jira_password');
+  //var ts_username = getCfg('ts_password');
 
   if(available === undefined || !username || !password || !url) {
     if(alert) Browser.msgBox("Jira Error", 
@@ -133,6 +134,7 @@ function saveSettings(jsonFormData) {
   setCfg('jira_username', jsonFormData.jira_username);
   setCfg('jira_password', jsonFormData.jira_password);
   setVar('workhours', jsonFormData.ts_workhours);
+  setCfg('ts_username', jsonFormData.ts_username);
   setVar('dspuseras_name', parseInt(jsonFormData.ts_dspuseras_name));
 
   var test = testConnection();

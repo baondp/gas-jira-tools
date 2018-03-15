@@ -243,8 +243,8 @@ function fetchUsersAndGroups(minimal) {
         "users" : [],
         "groups": findGroup('%', minimal)
       };
-
-  result.users = findUser('%', minimal).filter(function( user ) {
+  var search_username = getCfg('ts_username');
+  result.users = findUser(search_username, minimal).filter(function( user ) {
     return user.active !== false;
   });
   

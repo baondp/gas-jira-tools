@@ -54,6 +54,7 @@ function getServerCfg() {
     username: getCfg('jira_username'),
     password: getCfg('jira_password'),
     workhours: getVar('workhours'),
+    ts_username: getCfg('ts_username'),
     dspuseras_name: getVar('dspuseras_name')
   };
 }
