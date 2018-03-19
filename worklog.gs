@@ -166,6 +166,7 @@ function TimesheetTable1(options) {
         'from'    : null,
         'to'      : null,
         'interval': 'day',
+        'formatDate' : 'yyyyMMdd',
         'format'  : "EEE\n d/MMM"
       },
       periodTotals = {}, rowTimesTpl = {},
@@ -175,7 +176,10 @@ function TimesheetTable1(options) {
    * @desc Initialization, validation
    */
   this.init = function(options) {
-    sheet         = options.sheet ? options.sheet : getTicketSheet();
+    var _tz = SpreadsheetApp.getActive().getSpreadsheetTimeZone();
+    var newSheetName = 'Worklog ' + Utilities.formatDate(options.periodFrom, _tz, 'yyyy/MM/dd')
+                        + ' - ' + Utilities.formatDate(options.periodTo, _tz, 'yyyy/MM/dd');
+    sheet         = options.sheet ? options.sheet : getTicketSheet({sheetName : newSheetName});
     initRange     = sheet.getActiveCell();
     currentRowIdx = initRange.getRow(), currentColIdx = initRange.getColumn();
 
@@ -226,12 +230,19 @@ function TimesheetTable1(options) {
   this.addHeader = function(author, title) {
     title = title || 'Time Sheet';
 
-    var values = Array(numColumns-1).fill(''); // empty row of values
-        values.unshift(title); // set title to 1st cell
+    var values = Array(dataRowFields.length-1).fill(''); // empty row of values
+    values.unshift(title); // set title to 1st cell
     var formats     = Array(numColumns).fill('bold'),
         fontColors  = Array(numColumns).fill('#000'),
         bgColors    = Array(numColumns).fill('#3399ff')
     ;
+    var _tz = SpreadsheetApp.getActive().getSpreadsheetTimeZone();
+    
+    for(var key in periodTotals) {
+      values.push( Utilities.formatDate(new Date(key + 'T00:00:00.000+0000'), _tz, periodCfg.formatDate) );
+      //debug.log(key);
+    }
+    values.push(''); // Total colum
 
     // header
     range = sheet.getRange(currentRowIdx++, currentColIdx, 1, values.length);
@@ -247,7 +258,6 @@ function TimesheetTable1(options) {
     values = Array(dataRowFields.length-1).fill('');
     values.unshift('Summary for "' + author + '"');
     // attach period head lines
-    var _tz = SpreadsheetApp.getActive().getSpreadsheetTimeZone();
 
     for(var key in periodTotals) {
       values.push( Utilities.formatDate(new Date(key + 'T00:00:00.000+0000'), _tz, periodCfg.format) );

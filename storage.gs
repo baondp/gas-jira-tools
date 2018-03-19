@@ -146,6 +146,23 @@ function saveSettings(jsonFormData) {
   return {status: test.status, message: test.response};
 }
 
+/**
+ * @desc Save HRM server settings, provided in dialog form and perform 
+ *     a connection test to Jira api.
+ * @param jsonFormData {object}  JSON Form object of all form values
+ * @return {object} Object({status: [boolean], response: [string]})
+ */
+function saveSettingsHRM(jsonFormData) {
+  setCfg('company_domain', jsonFormData.company_domain);
+  setCfg('hrm_username', jsonFormData.hrm_username);
+  setCfg('hrm_password', jsonFormData.hrm_password);
+  setCfg('hrm_available', false);
+
+  var test = testHrmConnection();
+  
+  return {status: test.status, message: test.response};
+}
+
 
 function deleteAllProperties()
 {

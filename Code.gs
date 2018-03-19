@@ -45,16 +45,19 @@ function onInstall(e) {
 function addMenu() {
   SpreadsheetApp.getUi().createAddonMenu()
     // Tools
-    .addItem('Refresh Ticket Data', 'dialogRefreshTicketsIds')
+    //.addItem('Refresh Ticket Data', 'dialogRefreshTicketsIds')
     
-    .addSeparator()
+    //.addSeparator()
     .addItem('List Issues from Filter', 'dialogIssueFromFilter')
     .addItem('Create Time Report', 'dialogTimesheet')
 
     .addSeparator()
     .addItem('Settings', 'dialogSettings')
+    .addItem('Settings HRM', 'dialogSettingsHRM')
     .addItem('Configure Custom Fields', 'dialogCustomFields')
-    .addItem('About', 'dialogAbout')
+    //.addItem('About', 'dialogAbout')
+    .addSeparator()
+    .addItem('Open HRM', 'dialogOpenUrl')
   
     .addToUi();
 }

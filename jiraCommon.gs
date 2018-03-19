@@ -38,8 +38,12 @@ var ISSUE_COLUMNS = {
  * @desc Get current active sheet
  * @return {Sheet}
  */
-function getTicketSheet() {
-  return SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+function getTicketSheet(options) {
+  if(!options)
+    return SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  
+  var sheetName = options.sheetName;
+  return SpreadsheetApp.getActiveSpreadsheet().insertSheet(sheetName);
 }
 
 /**

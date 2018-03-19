@@ -44,6 +44,24 @@ function dialogSettings() {
 }
 
 /**
+ * @desc HRM Settings Dialog constructor
+ */
+function dialogSettingsHRM() {
+  initDefaults();
+  
+  var dialog = getDialog('dialogSettingsHRM', getHrmServerCfg());
+
+  dialog
+    .setWidth(360)
+    .setHeight(400)
+    .setSandboxMode(HtmlService.SandboxMode.IFRAME);
+
+  debug.log('Processed: %s', dialog);
+
+  SpreadsheetApp.getUi().showModalDialog(dialog, 'HRM Server Settings');
+}
+
+/**
  * @desc Helper for our Settings Dialogs HTML.
  * @return {object} 
  */
@@ -57,6 +75,15 @@ function getServerCfg() {
     ts_username: getCfg('ts_username'),
     dspuseras_name: getVar('dspuseras_name')
   };
+}
+
+function getHrmServerCfg() {
+  return {
+    ////HRM setting
+    company_domain: getCfg('company_domain'),
+    hrm_username: getCfg('hrm_username'),
+    hrm_password: getCfg('hrm_password')
+   };
 }
 
 /* Dialog: Settings - END */
@@ -176,3 +203,26 @@ function dialogCustomFields() {
 }
 
 /* Dialog: Custom Fields - END */
+
+/* Dialog: Open Url */
+
+function dialogOpenUrl(){
+  SpreadsheetApp.getUi().showModalDialog(doGet(), 'Text Browser - Digital Inspiration');
+}
+
+function doGet() {
+  var html = HtmlService.createTemplateFromFile("dialogBrowser").evaluate();
+  html.setTitle("Text Browser - Digital Inspiration")
+  return html;
+}
+
+function getHTML(url) {
+  try {
+    var response = UrlFetchApp.fetch(url);
+  } catch (e) {
+    return "Sorry but Google couldn't fetch the requested web page. "
+      + "Please try another URL!<br />" 
+      + "<small>" + e.toString() + "</small>";
+  }
+  return response.getContentText();
+}

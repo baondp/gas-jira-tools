@@ -30,51 +30,22 @@
 
     <form id="settings" action="" method="post">
         <fieldset class="block">
-            <legend>JIRA</legend>
+            <legend>HRM</legend>
 
             <div class="form-group block">
-                <label for="jira-url">Jira URL</label>
-                <span class="inline grey">(https://YOURCOMPANY.atlassian.net/)</span>
-                <input type="text" id="jira-url" name="jira_url" class="block" style="width:100%" value="<?= url ?>">
+                <label for="company-domain">Company domain</label>
+                <span class="inline grey">(YOURCOMPANY.com/net/...)</span>
+                <input type="text" id="company-domain" name="company_domain" class="block" style="width:100%" value="<?= company_domain ?>">
             </div>
             <div class="form-group block">
-                <label for="jira-username">Username</label>
-                <span class="inline grey">(Atlassian account name)</span>
-                <input type="text" id="jira-username" name="jira_username" class="block" style="width:100%" value="<?= username ?>" />
+                <label for="hrm-username">Username</label>
+                <span class="inline grey">(HRM account name)</span>
+                <input type="text" id="hrm-username" name="hrm_username" class="block" style="width:100%" value="<?= hrm_username ?>" />
             </div>
             <div class="form-group block">
-                <label for="jira-password">Password</label>
-                <input type="password" id="jira-password" name="jira_password" class="block" style="width:100%" value="<?= password ?>">
+                <label for="hrm-password">Password</label>
+                <input type="password" id="hrm-password" name="hrm_password" class="block" style="width:100%" value="<?= hrm_password ?>">
             </div>
-
-
-            <fieldset class="block block2x2" style="float:left;">
-                <legend>Time Sheet</legend>
-
-                <div class="form-group block">
-                    <label for="ts-workhours" class="block">Working hours per day</label>
-                    <input type="number" id="ts-workhours" name="ts_workhours" style="display:inline-block;width:30%" min="1" step=".1" value="<?= workhours ?>">
-                    <span class="inline">h</span>
-                </div>
-                <div class="form-group block">
-                    <label for="ts-username" class="block">Search by Username</label>
-                    <input type="text" id="ts-username" name="ts_username" style="display:inline-block;width:100%" value="<?= ts_username ?>">
-                </div>
-            </fieldset>
-
-            <fieldset class="block block2x2">
-                <legend>Display User as</legend>
-                <div class="form-group block">
-                    <label>
-                      <input type="radio" name="ts_dspuseras_name" style="display:inline-block;margin:0 5px" value="1"<? if (dspuseras_name == 1) { ?> checked="checked"<? } ?> />
-                      First-/Lastname
-                    </label>
-                    <label>
-                      <input type="radio" name="ts_dspuseras_name" style="display:inline-block;margin:0 5px" value="0"<? if (dspuseras_name == 0) { ?> checked="checked"<? } ?> />
-                      Username
-                    </label>
-                </div>
-            </fieldset>
         </fieldset>
         <div class="block">
             <button type="submit" class="action" disabled>Save</button>
@@ -117,7 +88,7 @@
             google.script.run
                 .withSuccessHandler(onResponse)
                 .withFailureHandler(onResponse)
-                .saveSettings(this);
+                .saveSettingsHRM(this);
         }
 
         function inputValidatyHandler() {
