@@ -7,7 +7,9 @@ var jiraColumnDefault = [
   'updated',
   'assignee',
   'duedate',
-  'project'
+  'project',
+  'fixVersions',
+  'labels'
 ];
 
 /**

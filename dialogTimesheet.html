@@ -73,6 +73,7 @@
     </form>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script>-->
     <script>
       var frmWorklog  = document.forms['worklog'];
       var valid   = false;
@@ -147,9 +148,11 @@
         format: 'yyyy-MM-dd',
         maxDate: new Date(),
         onSelect: function() {
-          if (this.getDate() > pickerTo.getDate()) {
-            pickerTo.setDate(this.getDate());
-          }
+          //if (this.getDate() > pickerTo.getDate()) {
+          //  pickerTo.setDate(this.getDate());
+          //}
+          //pickerTo.setMoment(this.getMoment().add(7, 'days').calendar());
+          //console.log(this.getDate().toString('yyyy/MM/dd'));
         },
         toString(date) {
           return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
@@ -158,11 +161,11 @@
       var pickerTo = new Pikaday({
         field: frmWorklog.wlEndDate, 
         format: 'yyyy-MM-dd',
-        maxDate: new Date(),
+        //maxDate: new Date(),
         onSelect: function() {
-          if (this.getDate() < pickerFrom.getDate()) {
-            pickerFrom.setDate(this.getDate());
-          }
+          //if (this.getDate() < pickerFrom.getDate()) {
+          //  pickerFrom.setDate(this.getDate());
+          //}
         },
         toString(date) {
           return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);

@@ -16,10 +16,10 @@ var ISSUE_COLUMNS = {
   creator: 'Creator',
   reporter: 'Reporter',
   duedate: 'Due',
-  /* --- */
-  labels: 'Labels',
-  project: 'Project',
   fixVersions: 'Fix Version',
+  labels: 'Labels',
+  /* --- */
+  project: 'Project',
   components: 'Components',
   description: 'Description',
   resolution: 'Resolution',
